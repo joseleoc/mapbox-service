@@ -25,7 +25,6 @@ export function renderMap(containerId: string, options?: RenderMapOptions): mapb
       zoom: options?.zoom || defaultZoom,
       center: [options?.center?.lng || 0, options?.center?.lat || 0],
     });
-    console.log(map);
     map.once('load', () => map.resize())
     return map;
   } catch (error: any) {
@@ -50,7 +49,7 @@ export function renderMap(containerId: string, options?: RenderMapOptions): mapb
    *   fillColor: '#ff0000',
    * },
    * //... more polygons]
-   * onPolygonClick: (polygon) => { console.log(polygon) }
+   * onPolygonClick: (polygon) => { console.info(polygon) }
    * }
    */
 export function renderPolygonsToMap(map: mapboxgl.Map, polygonsOptions: RenderPolygonsOptions) {
