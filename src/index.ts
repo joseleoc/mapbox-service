@@ -1,7 +1,8 @@
 import mapboxgl from "mapbox-gl";
-import { MarkerFeatureCollection, MarkerIconDictionary, PolygonFeature, RenderMapOptions, RenderPolygonsOptions, mapMarkersOptions } from "./types/types";
+import { MarkerFeatureCollection, MarkerIconDictionary, RenderMapOptions, RenderPolygonsOptions, mapMarkersOptions } from "./types/types";
 import { DefaultSources } from "./types/enums";
 import { extractMarkerIcons, markerPropsToFeatures, polygonPropToFeature } from "./utils";
+import { PolygonFeature } from "./types/classes";
 
 const defaultMapStyle = "mapbox://styles/mapbox/streets-v11";
 const defaultZoom = 15;
@@ -157,7 +158,7 @@ export function removePolygonsFromMap(map: mapboxgl.Map, sourceId: string = Defa
 
 
 /**
- * Renders a layer of markers to a map.
+ * Renders a layer of markers (group of markers) to a map.
  * 
  * @param map - The Mapbox GL map instance.
  * @param markersOptions - {@link mapMarkersOptions} The options for rendering the markers.

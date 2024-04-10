@@ -35,7 +35,7 @@ const renderMarkers = (mapInstance) => {
   ];
   renderMarkersToMap(mapInstance, {
     markers,
-    onPointClick: (e) => console.log(e),
+    onPointClick: (e) => console.info(e),
   });
 };
 
@@ -57,5 +57,8 @@ map.once("load", () => {
     },
   ];
 
-  renderPolygonsToMap(map, { polygons });
+  renderPolygonsToMap(map, {
+    polygons,
+    onPolygonClick: (e) => console.info(e),
+  });
 });

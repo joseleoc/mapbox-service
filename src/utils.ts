@@ -1,21 +1,16 @@
-import { CoordsArray, MarkerIconDictionary, MarkerPointProps, PointFeature, PolygonFeature, PolygonProp } from "./types/types";
+import { PointFeature, PolygonFeature } from "./types/classes";
+import { CoordsArray, MarkerIconDictionary, MarkerPointProps, PolygonProp } from "./types/types";
 
 export function polygonPropToFeature(polygons: PolygonProp[]): PolygonFeature[] {
     const polygonsData: PolygonFeature[] = polygons.map((p) => {
         const coordinates: CoordsArray[] = p.path.map((c) => [c.lng, c.lat]);
 
+
         if (!firstLastCoordAreEqual(coordinates)) {
             coordinates.push(coordinates[0])
         }
 
-        return {
-            type: 'Feature',
-            geometry: {
-                type: 'Polygon',
-                coordinates: [coordinates],
-            },
-            properties: { ...p.properties, fillColor: p.fillColor },
-        };
+        return new PolygonFeature({ coords: coordinates, properties: { ...p.properties, fillColor: p.fillColor } })
     });
 
     return polygonsData
@@ -27,24 +22,17 @@ function firstLastCoordAreEqual(coords: CoordsArray[]) {
 
 export function markerPropsToFeatures(markers: MarkerPointProps[]): PointFeature[] {
     return markers.map((marker) => {
-        const coordinates: CoordsArray = [marker.coords.lng, marker.coords.lat];
+        const coords: CoordsArray = [marker.coords.lng, marker.coords.lat];
 
-        const feature: PointFeature = {
-            type: 'Feature',
-            geometry: {
-                type: 'Point',
-                coordinates,
-            },
-            properties: {
+        return new PointFeature({
+            coords, properties: {
                 id: marker.id,
                 ...marker.properties,
                 icon: marker.icon?.name,
                 iconSize: marker.iconSize,
                 iconColor: marker.iconColor,
             },
-        };
-
-        return feature
+        })
     })
 }
 
