@@ -34,16 +34,10 @@ export interface PolygonFeature {
   properties: any;
 }
 
-export class PointFeature {
+export type PointFeature = {
   type: "Feature";
-  geometry: { type: "Point"; coordinates: [number, number] };
+  geometry: { type: "Point"; coordinates: CoordsArray };
   properties: any;
-
-  constructor(data: PointFeature) {
-    this.type = data.type;
-    this.geometry = data.geometry;
-    this.properties = data.properties;
-  }
 }
 
 export interface PolygonProp {
@@ -68,17 +62,29 @@ export interface MarkerIconProps {
 }
 
 export interface mapMarkersOptions {
-  points: MarkerPointProps[];
-  iconsProps?: MarkerIconProps;
+  markers: MarkerPointProps[];
   onPointClick?: (pointProperties: any) => void;
   sourceId?: string;
 }
 
-export interface MarkerPointProps {
+export type MarkerPointProps = {
   id: string;
   coords: Coords;
   properties: any;
-  icon?: string;
+  icon?: MarkerIcon;
   iconSize?: number;
   iconColor?: string;
+}
+
+export type MarkerIcon = {
+  name: string;
+  path: string;
+  dynamicColor?: boolean;
+}
+
+export type MarkerIconDictionary = { [key: string]: Pick<MarkerIcon, 'path' | 'dynamicColor'> }
+
+export type MarkerFeatureCollection = {
+  type: 'FeatureCollection';
+  features: PointFeature[];
 }
