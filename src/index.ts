@@ -1,8 +1,8 @@
 import mapboxgl from "mapbox-gl";
-import { Coords, MarkerFeatureCollection, MarkerIconDictionary, RenderMapOptions, RenderPolygonsOptions, SingleMarkerOptions, mapMarkersOptions } from "./types/types";
+import { Coords, MarkerFeatureCollection, MarkerIconDictionary, RenderMapOptions, RenderPolygonsOptions, SingleMarkerOptions, MarkersOptions, MarkerPointProps } from "./types/types";
 import { DefaultSources } from "./types/enums";
 import { extractMarkerIcons, markerPropsToFeatures, polygonPropToFeature } from "./utils";
-import { PolygonFeature } from "./types/classes";
+import { PointFeature, PolygonFeature } from "./types/classes";
 import { Marker } from "mapbox-gl";
 
 const defaultMapStyle = "mapbox://styles/mapbox/streets-v11";
@@ -162,11 +162,11 @@ export function removePolygonsFromMap(map: mapboxgl.Map, sourceId: string = Defa
  * Renders a layer of markers (group of markers) to a map.
  * 
  * @param map - The Mapbox GL map instance.
- * @param markersOptions - {@link mapMarkersOptions} The options for rendering the markers.
+ * @param markersOptions - {@link MarkersOptions} The options for rendering the markers.
  *  Can only render a layer at once, if a marker contains the icon property, the layer will only render the icons.
  * @throws {Error} - If the map is not defined or if the source is already defined.
  */
-export function renderMarkersToMap(map: mapboxgl.Map, markersOptions: mapMarkersOptions) {
+export function renderMarkersToMap(map: mapboxgl.Map, markersOptions: MarkersOptions) {
   if (!map) throw new Error('Map is not defined');
   let sourceId = markersOptions?.sourceId || DefaultSources.Markers;
   const { markers, onPointClick } = markersOptions;
@@ -213,7 +213,7 @@ export function renderMarkersToMap(map: mapboxgl.Map, markersOptions: mapMarkers
       });
     }
   } else {
-    throw new Error('Source is already defined')
+    setMarkersToExistingLayer(map, markersOptions)
   }
 
   if (onPointClick) {
@@ -232,6 +232,44 @@ export function renderMarkersToMap(map: mapboxgl.Map, markersOptions: mapMarkers
       map.getCanvas().style.cursor = '';
     });
   }
+}
+
+/**
+ * Adds multiple marker points to a map in Mapbox GL.
+ *
+ * This function takes a configuration object (`options`) to define markers and how they should be added to the map. 
+ * If a data source with the provided `sourceId` (defaults to 'Markers') exists on the map, markers are added to that source. 
+ * Otherwise, the function falls back to calling {@link renderMarkersToMap}.
+ *
+ * @param map - The mapboxgl.Map object to which the markers will be added.
+ * @param options - An object of type `MarkersOptions` defining marker data and configuration.
+ */
+export function setMarkersToExistingLayer(map: mapboxgl.Map, options: MarkersOptions) {
+  let sourceId = options?.sourceId || DefaultSources.Markers;
+  if (!!map.getSource(sourceId)) {
+    const { markers } = options
+    const features: PointFeature[] = markers.map((point) => {
+      const coords: [number, number] = [point.coords.lng, point.coords.lat];
+      return new PointFeature({
+        coords, properties: {
+          id: point.id,
+          ...point.properties,
+          icon: point.icon || 'default',
+          iconSize: point.iconSize || 1,
+          iconColor: point.iconColor || '#000',
+        },
+      })
+    });
+
+    // @ts-expect-error
+    map.getSource(sourceId)['setData']({
+      type: 'FeatureCollection',
+      features,
+    });
+  } else {
+    renderMarkersToMap(map, options)
+  }
+
 }
 
 /**

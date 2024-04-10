@@ -48,7 +48,7 @@ export interface PolygonProp {
   lineWidth: number;
 }
 
-export interface mapMarkersOptions {
+export interface MarkersOptions {
   /** Markers to render to the map.
    * @see {@link MarkerPointProps}
   */
