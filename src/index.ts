@@ -231,3 +231,15 @@ export function renderMarkersToMap(map: mapboxgl.Map, markersOptions: mapMarkers
     });
   }
 }
+
+/**
+ * Removes a marker layer from a given map
+ * @param map The map to remove the marker.
+ * @param sourceId The source id of the marker. Default is `DefaultSources.Markers`.
+ */
+export function removeMarkersFromMap(map: mapboxgl.Map, sourceId: string = DefaultSources.Markers) {
+  if (!!map.getSource(sourceId) && map.getLayer(sourceId + '_marker-point')) {
+    map.removeLayer(sourceId + '_marker-point');
+    map.removeSource(sourceId);
+  }
+}
