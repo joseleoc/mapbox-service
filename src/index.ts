@@ -1,8 +1,9 @@
 import mapboxgl from "mapbox-gl";
-import { MarkerFeatureCollection, MarkerIconDictionary, RenderMapOptions, RenderPolygonsOptions, mapMarkersOptions } from "./types/types";
+import { Coords, MarkerFeatureCollection, MarkerIconDictionary, RenderMapOptions, RenderPolygonsOptions, SingleMarkerOptions, mapMarkersOptions } from "./types/types";
 import { DefaultSources } from "./types/enums";
 import { extractMarkerIcons, markerPropsToFeatures, polygonPropToFeature } from "./utils";
 import { PolygonFeature } from "./types/classes";
+import { Marker } from "mapbox-gl";
 
 const defaultMapStyle = "mapbox://styles/mapbox/streets-v11";
 const defaultZoom = 15;
@@ -243,4 +244,21 @@ export function removeMarkersFromMap(map: mapboxgl.Map, sourceId: string = Defau
     map.removeLayer(sourceId + '_marker-point');
     map.removeSource(sourceId);
   }
+}
+
+/**
+ * Renders a single marker on a mapboxgl map.
+ *
+ * This function creates a new mapboxgl.Marker instance with the provided options (if any), sets its longitude and latitude coordinates, and adds it to the specified map. It is ideal for rendering a small number of markers due to performance considerations for large datasets.
+ *
+ * @param map - A mapboxgl.Map object where the marker will be rendered.
+ * @param coords - An object containing latitude and longitude coordinates for the marker position. It should have `lng` and `lat` properties. {@link Coords}
+ * @param options -  {@link SingleMarkerOptions} (Optional) An object of type `SingleMarkerOptions` to customize the marker's appearance and behavior.
+ * @returns  The created mapboxgl.Marker instance. {@link Marker }
+ */
+export function renderSingleMarker(map: mapboxgl.Map, coords: Coords, options?: SingleMarkerOptions): Marker {
+
+  const marker = new mapboxgl.Marker({ ...options }).setLngLat([coords.lng, coords.lat]).addTo(map);
+
+  return marker;
 }

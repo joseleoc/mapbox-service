@@ -3,6 +3,7 @@ import {
   renderMap,
   renderPolygonsToMap,
   renderMarkersToMap,
+  renderSingleMarker,
 } from "../build";
 
 setToken(
@@ -61,4 +62,10 @@ map.once("load", () => {
     polygons,
     onPolygonClick: (e) => console.info(e),
   });
+
+  renderSingleMarker(
+    map,
+    { lat: 37.4163221, lng: -122.3422178 },
+    { draggable: true }
+  );
 });

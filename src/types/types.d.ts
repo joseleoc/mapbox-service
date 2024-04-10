@@ -94,3 +94,24 @@ export type MarkerFeatureCollection = {
   type: 'FeatureCollection';
   features: PointFeature[];
 }
+
+/** 
+ * Options for rendering a single marker on a map. This is best suited for a small number of markers due to performance considerations.
+  * @see the [Mapbox GL JS Marker documentation](https://docs.mapbox.com/mapbox-gl-js/api/markers/#marker) for more details.
+ */
+export type SingleMarkerOptions = {
+  /** Space-separated CSS class names to add to marker element. */
+  className?: string
+  /** The color to use for the default marker if options.element is not provided. The default is light blue. */
+  color?: string
+  /** A boolean indicating whether or not a marker is able to be dragged to a new position on the map.  */
+  draggable?: boolean
+  /**  DOM element to use as a marker. The default is a light blue, droplet-shaped SVG marker. */
+  element?: HTMLElement
+  /** The offset in pixels as a PointLike object to apply relative to the element's center. Negatives indicate left and up. */
+  offset?: CoordsArray
+  /** The rotation angle of the marker in degrees, relative to its respective rotationAlignment setting. A positive value will rotate the marker clockwise. */
+  rotation?: number;
+  /** The scale to use for the default marker if options.element is not provided. The default scale corresponds to a height of 41px and a width of 27px . */
+  scale?: number;
+}
