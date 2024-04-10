@@ -107,3 +107,19 @@ export function renderPolygonsToMap(map: mapboxgl.Map, polygonsOptions: RenderPo
     });
   }
 }
+
+
+
+/**
+ * Removes a polygon from a map if the polygon's fill and outline layers exist and the polygon's source is present in the map.
+ *
+ * @param map - An instance of the `mapboxgl.Map` class representing the map.
+ * @param polygonId - A string representing the source id of the polygon to be removed from the map.
+ */
+export function removePolygonsFromMap(map: mapboxgl.Map, sourceId: string = DefaultSources.Polygons) {
+  if (!!map.getSource(sourceId)) {
+    map.removeLayer(sourceId + '_fill');
+    map.removeLayer(sourceId + '_outline');
+    map.removeSource(sourceId);
+  }
+}
