@@ -11,11 +11,11 @@
 
 <!-- GETTING STARTED -->
 
-Before you get started with Mapbox GL JS, you need to have a Mapbox [access token][mapbox-accesstoken-doc]{:target="\_blank" rel="noopener"} and add Mapbox GL JS to your project using either the CDN or the mapbox-gl npm package.
+Before you get started with Mapbox GL JS, you need to have a Mapbox [access token](https://docs.mapbox.com/help/getting-started/access-tokens/){:target="\_blank" rel="noopener"} and add Mapbox GL JS to your project using either the CDN or the mapbox-gl npm package.
 
-To use Mapbox GL JS, you need to have a Mapbox access token. This access token associates your map with a Mapbox account. For more information on creating and using access tokens, see our token [management documentation][mapbox-token-doc]{:target="\_blank" rel="noopener"}.
+To use Mapbox GL JS, you need to have a Mapbox access token. This access token associates your map with a Mapbox account. For more information on creating and using access tokens, see our token [management documentation](https://docs.mapbox.com/accounts/guides/tokens/){:target="\_blank" rel="noopener"}.
 
-See the mapbox's official getting started guide [documentation][mpabox-install-guide]{:target="\_blank" rel="noopener"}
+See the mapbox's official getting started guide [documentation](https://docs.mapbox.com/mapbox-gl-js/guides/install/){:target="\_blank" rel="noopener"}
 
 Install the npm package.
 
@@ -57,18 +57,14 @@ Initialize the service
 
 # Contact
 
-[![LinkedIn][linkedin-shield]][linkedin-url]{:target="\_blank" rel="noopener"}
+[![LinkedIn][linkedin-shield]](https://www.linkedin.com/in/leonardo-contreras-v/){:target="\_blank" rel="noopener"}
+
 Leonardo Contreras - joseleoc123@gmail.com
 
-Project link: [github][github-ulr]{:target="\_blank" rel="noopener"}
+Project link: [github](https://github.com/joseleoc/mapbox-service){:target="\_blank" rel="noopener"}
 
 <!-- MARKDOWN LINKS & IMAGES -->
 
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/othneildrew
-[github-ulr]: https://github.com/joseleoc/mapbox-service?tab=readme-ov-file
 [typescript-badge]: https://img.shields.io/badge/typescript-white?logo=typescript
 [mapbox-badge]: https://img.shields.io/badge/mapbox-blue?logo=mapbox
-[mapbox-accesstoken-doc]: https://docs.mapbox.com/help/getting-started/access-tokens/
-[mapbox-token-doc]: https://docs.mapbox.com/accounts/guides/tokens/
-[mpabox-install-guide]: https://docs.mapbox.com/mapbox-gl-js/guides/install/
