@@ -1,43 +1,44 @@
-<!-- ABOUT THE PROJECT -->
+# Mapbox utils service
 
-## About The Project
-
-<!-- BUILDT WITH -->
+Simplifies working with Mapbox GL JS by eliminating boilerplate code. It provides intuitive functions to render and manage maps, markers, lines, and polygons, allowing you to focus on building interactive map features for your project.
 
 ### Built With
 
-![typescript][typescript-badge]
-![mapboxgl][mapbox-badge]
+[mapboxgl][mapbox-badge](https://docs.mapbox.com/mapbox-gl-js/guides/install/)
 
 <!-- GETTING STARTED -->
 
-Before you get started with Mapbox GL JS, you need to have a Mapbox [access token](https://docs.mapbox.com/help/getting-started/access-tokens/){:target="\_blank" rel="noopener"} and add Mapbox GL JS to your project using either the CDN or the mapbox-gl npm package.
+# Get started
 
-To use Mapbox GL JS, you need to have a Mapbox access token. This access token associates your map with a Mapbox account. For more information on creating and using access tokens, see our token [management documentation](https://docs.mapbox.com/accounts/guides/tokens/){:target="\_blank" rel="noopener"}.
+### Get token
 
-See the mapbox's official getting started guide [documentation](https://docs.mapbox.com/mapbox-gl-js/guides/install/){:target="\_blank" rel="noopener"}
+Before you get started with Mapbox GL JS, you need to have a Mapbox [access token](https://docs.mapbox.com/help/getting-started/access-tokens/) and add Mapbox GL JS to your project using either the CDN or the mapbox-gl npm package.
 
-Install the npm package.
+To use Mapbox GL JS, you need to have a Mapbox access token. This access token associates your map with a Mapbox account. For more information on creating and using access tokens, see our token [management documentation](https://docs.mapbox.com/accounts/guides/tokens/).
+
+See the mapbox's official getting started guide [documentation](https://docs.mapbox.com/mapbox-gl-js/guides/install/)
+
+### Installation
+
+- Install the npm package.
 
 ```bash
 npm install --save mapbox-gl
 ```
 
-Include the CSS file in the <head> of your HTML file. The CSS file is required to display the map and make elements like Popups and Markers work.
+- Include the CSS file in the <head> of your HTML file. The CSS file is required to display the map and make elements like Popups and Markers work.
 
 ```bash
 <link href='https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css' rel='stylesheet' />
 ```
 
-If you're using a CSS loader like webpack css-loader, you can import the CSS directly in your JavaScript.
+- If you're using a CSS loader like webpack css-loader, you can import the CSS directly in your JavaScript.
 
 ```bash
 import 'mapbox-gl/dist/mapbox-gl.css';
 ```
 
-Initialize the service
-
-## Getting Started
+## Usage
 
 ```bash
 <body>
@@ -47,9 +48,10 @@ Initialize the service
 <script>
     import { setToken, renderMap } from 'mapbox-service';
 
+    // Set the user mapbox token here.
     setToken(##########);
 
-    renderMap('container-id');
+    renderMap('container-id', {...options here});
 </script>
 ```
 
@@ -57,11 +59,11 @@ Initialize the service
 
 # Contact
 
-[![LinkedIn][linkedin-shield]](https://www.linkedin.com/in/leonardo-contreras-v/){:target="\_blank" rel="noopener"}
+[![LinkedIn][linkedin-shield]](https://www.linkedin.com/in/leonardo-contreras-v/)
 
 Leonardo Contreras - joseleoc123@gmail.com
 
-Project link: [github](https://github.com/joseleoc/mapbox-service){:target="\_blank" rel="noopener"}
+[Project link](https://github.com/joseleoc/mapbox-service)
 
 <!-- MARKDOWN LINKS & IMAGES -->
 
