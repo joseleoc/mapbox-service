@@ -1,3 +1,9 @@
+export type Coords = { lat: number; lng: number };
+/** Represents an array with the coords. where the first element is the longitude and the second is the latitude. */
+export type CoordsArray = [number, number];
+
+export type MinimumPolygonPath = [Coords, Coords, Coords, ...Coords[]]
+
 export interface RenderMapOptions {
   /** The initial geographical centerpoint of the map. default is `{lat: 0, lng: 0} ` */
   center?: Coords;
@@ -7,8 +13,6 @@ export interface RenderMapOptions {
   zoom?: number;
 }
 
-export type Coords = { lat: number; lng: number };
-export type CoordsArray = [number, number];
 
 export type RenderPolygonsOptions = {
   /** The polygons to render */
@@ -28,23 +32,6 @@ export type RenderPolygonsOptions = {
   onPolygonClick?: (polygonProperties: any) => void;
 }
 
-export interface PolygonFeature {
-  type: "Feature";
-  geometry: { type: "Polygon"; coordinates: [[number, number][]] };
-  properties: any;
-}
-
-export class PointFeature {
-  type: "Feature";
-  geometry: { type: "Point"; coordinates: [number, number] };
-  properties: any;
-
-  constructor(data: PointFeature) {
-    this.type = data.type;
-    this.geometry = data.geometry;
-    this.properties = data.properties;
-  }
-}
 
 export interface PolygonProp {
   /** Polygon id */
@@ -61,24 +48,70 @@ export interface PolygonProp {
   lineWidth: number;
 }
 
-type MinimumPolygonPath = [Coords, Coords, Coords, ...Coords[]]
-
-export interface MarkerIconProps {
-  [name: string]: { path: string; dynamicColor?: boolean };
-}
-
-export interface mapMarkersOptions {
-  points: MarkerPointProps[];
-  iconsProps?: MarkerIconProps;
+export interface MarkersOptions {
+  /** Markers to render to the map.
+   * @see {@link MarkerPointProps}
+  */
+  markers: MarkerPointProps[];
+  /** A callback function that is invoked when the marker is clicked. */
   onPointClick?: (pointProperties: any) => void;
+  /** Source id to refer to this group of markers. */
   sourceId?: string;
 }
 
-export interface MarkerPointProps {
+export type MarkerPointProps = {
+  /** The marker id */
   id: string;
+  /** The marker's geographical coordinates. Should be an object with `lat` and `lng` properties. */
   coords: Coords;
+  /** The marker's properties. used when the onPointClick is defined and to return such data.  */
   properties: any;
-  icon?: string;
+  /** The marker's icon. Is an object with `name`, `path` and `dynamicColor` properties. 
+   * @see {@link MarkerIcon} 
+   * */
+  icon?: MarkerIcon;
+  /** The marker's icon size, represented in percentages where 100% is `1`. 100% of the size is the img width and height. you can change the size from 0 to 1. */
   iconSize?: number;
+  /** The marker's icon color. Default is `#000`. if the icon is defined, you can set the icon's dynamic color to get this color and mask the img with this color, the image must be a PNG or JPG file and must contain plain colors  */
   iconColor?: string;
+}
+
+export type MarkerIcon = {
+  /** Icon's name */
+  name: string;
+  /** The path to get the img */
+  path: string;
+  /** If the icon is dynamic, you can set the icon's dynamic a color and mask the img with the {@link MarkerPointProps} color, the image must be a PNG or JPG file and must contain plain colors */
+  dynamicColor?: boolean;
+}
+
+/** Marker icon dictionary, where the key is the icon's name and the value is an object with the icon's path and dynamicColor properties. */
+export type MarkerIconDictionary = { [key: string]: Pick<MarkerIcon, 'path' | 'dynamicColor'> }
+
+
+/** Use to create a feature collection of markers in a map */
+export type MarkerFeatureCollection = {
+  type: 'FeatureCollection';
+  features: PointFeature[];
+}
+
+/** 
+ * Options for rendering a single marker on a map. This is best suited for a small number of markers due to performance considerations.
+  * @see the [Mapbox GL JS Marker documentation](https://docs.mapbox.com/mapbox-gl-js/api/markers/#marker) for more details.
+ */
+export type SingleMarkerOptions = {
+  /** Space-separated CSS class names to add to marker element. */
+  className?: string
+  /** The color to use for the default marker if options.element is not provided. The default is light blue. */
+  color?: string
+  /** A boolean indicating whether or not a marker is able to be dragged to a new position on the map.  */
+  draggable?: boolean
+  /**  DOM element to use as a marker. The default is a light blue, droplet-shaped SVG marker. */
+  element?: HTMLElement
+  /** The offset in pixels as a PointLike object to apply relative to the element's center. Negatives indicate left and up. */
+  offset?: CoordsArray
+  /** The rotation angle of the marker in degrees, relative to its respective rotationAlignment setting. A positive value will rotate the marker clockwise. */
+  rotation?: number;
+  /** The scale to use for the default marker if options.element is not provided. The default scale corresponds to a height of 41px and a width of 27px . */
+  scale?: number;
 }
