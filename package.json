@@ -10,12 +10,12 @@
   },
   "license": "MIT",
   "main": "dist/index.js",
-  "types": "src/index.d.ts",
+  "types": "dist/index.d.ts",
   "type": "module",
   "scripts": {
     "link": "link",
     "tsc": "tsc -p tsconfig.json",
-    "lint": "eslint",
+    "lint": "eslint --fix",
     "build": "tsup src/index.ts --format cjs,esm --dts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "changeset": "changeset"
