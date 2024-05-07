@@ -18,7 +18,8 @@
     "lint": "eslint --fix",
     "build": "tsup src/index.ts --format cjs,esm --dts",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "changeset": "changeset"
+    "changeset": "changeset",
+    "release":"pnpm run build && changeset publish"
   },
   "keywords": [
     "mapbox",
