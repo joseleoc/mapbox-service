@@ -17,5 +17,5 @@ jobs:
           node-version: latest
           cache: "pnpm"
 
-      - run: pnpm intall --frozen-lockfile
+      - run: pnpm install --frozen-lockfile
       - run: pnpm run tsc && pnpm run lint && pnpm run build
