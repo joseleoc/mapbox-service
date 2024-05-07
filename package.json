@@ -1,26 +1,46 @@
 {
   "name": "mapbox-utils-service",
-  "version": "1.0.1",
-  "description": "",
-  "main": "build/index.js",
+  "version": "0.0.1",
+  "description": "Enhance mapbox-gl-js development workflow with a collection of utility functions.",
+  "repository": "https://github.com/joseleoc/mapbox-service",
+  "author": {
+    "name": "Leonardo Contreras",
+    "email": "joseleoc123@gmail.com",
+    "url": "https://github.com/joseleoc"
+  },
+  "license": "MIT",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
   "scripts": {
     "link": "link",
     "tsc": "tsc -p tsconfig.json",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint --fix",
+    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "changeset": "changeset"
   },
   "keywords": [
     "mapbox",
-    "utils",
-    "service"
+    "mapbox-gl-js",
+    "geolocation",
+    "maps",
+    "map",
+    "markers",
+    "popups",
+    "navigation",
+    "geojson"
   ],
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
+    "@changesets/cli": "^2.27.1",
+    "@eslint/js": "^9.2.0",
     "@types/mapbox-gl": "3.1.0",
     "eslint": "9.1.1",
-    "eslint-plugin-prettier": "5.1.3",
+    "globals": "^15.1.0",
     "prettier": "3.2.5",
-    "typescript": "5.4.5"
+    "tsup": "8.0.2",
+    "typescript": "5.4.5",
+    "typescript-eslint": "^7.8.0"
   },
   "dependencies": {
     "@mapbox/mapbox-gl-geocoder": "5.0.2",

@@ -1,4 +1,4 @@
-import { CoordsArray } from "./types";
+import { CoordsArray } from "../index.d";
 
 /** Represents a polygon inside a group of layer of polygons in a map */
 export class PolygonFeature {

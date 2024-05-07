@@ -1,5 +1,5 @@
 import { PointFeature, PolygonFeature } from "./types/classes";
-import { CoordsArray, MarkerIconDictionary, MarkerPointProps, PolygonProp } from "./types/types";
+import { CoordsArray, MarkerIconDictionary, MarkerPointProps, PolygonProp } from "./index.d";
 
 export function polygonPropToFeature(polygons: PolygonProp[]): PolygonFeature[] {
     const polygonsData: PolygonFeature[] = polygons.map((p) => {

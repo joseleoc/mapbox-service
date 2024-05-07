@@ -1,5 +1,5 @@
 import mapboxgl from "mapbox-gl";
-import { Coords, MarkerFeatureCollection, MarkerIconDictionary, RenderMapOptions, RenderPolygonsOptions, SingleMarkerOptions, MarkersOptions, MarkerPointProps } from "./types/types";
+import { Coords, MarkerFeatureCollection, MarkerIconDictionary, RenderMapOptions, RenderPolygonsOptions, SingleMarkerOptions, MarkersOptions } from "./index.d";
 import { DefaultSources } from "./types/enums";
 import { extractMarkerIcons, markerPropsToFeatures, polygonPropToFeature } from "./utils";
 import { PointFeature, PolygonFeature } from "./types/classes";
@@ -90,7 +90,7 @@ export function renderPolygonsToMap(map: mapboxgl.Map, polygonsOptions: RenderPo
   if (!polygonsOptions.polygons) throw new Error('Polygons are not defined');
 
   const { polygons, onPolygonClick } = polygonsOptions;
-  let sourceId = polygonsOptions?.sourceId || DefaultSources.Polygons;
+  const sourceId = polygonsOptions?.sourceId || DefaultSources.Polygons;
 
   const polygonsData: PolygonFeature[] = polygonPropToFeature(polygons)
 
@@ -150,7 +150,7 @@ export function renderPolygonsToMap(map: mapboxgl.Map, polygonsOptions: RenderPo
  * @param polygonId - A string representing the source id of the polygon to be removed from the map.
  */
 export function removePolygonsFromMap(map: mapboxgl.Map, sourceId: string = DefaultSources.Polygons) {
-  if (!!map.getSource(sourceId)) {
+  if (map.getSource(sourceId) != null) {
     map.removeLayer(sourceId + '_fill');
     map.removeLayer(sourceId + '_outline');
     map.removeSource(sourceId);
@@ -168,7 +168,7 @@ export function removePolygonsFromMap(map: mapboxgl.Map, sourceId: string = Defa
  */
 export function renderMarkersToMap(map: mapboxgl.Map, markersOptions: MarkersOptions) {
   if (!map) throw new Error('Map is not defined');
-  let sourceId = markersOptions?.sourceId || DefaultSources.Markers;
+  const sourceId = markersOptions?.sourceId || DefaultSources.Markers;
   const { markers, onPointClick } = markersOptions;
   const icons = extractMarkerIcons(markers);
 
@@ -245,8 +245,8 @@ export function renderMarkersToMap(map: mapboxgl.Map, markersOptions: MarkersOpt
  * @param options - An object of type `MarkersOptions` defining marker data and configuration.
  */
 export function setMarkersToExistingLayer(map: mapboxgl.Map, options: MarkersOptions) {
-  let sourceId = options?.sourceId || DefaultSources.Markers;
-  if (!!map.getSource(sourceId)) {
+  const sourceId = options?.sourceId || DefaultSources.Markers;
+  if (map.getSource(sourceId) != null) {
     const { markers } = options
     const features: PointFeature[] = markers.map((point) => {
       const coords: [number, number] = [point.coords.lng, point.coords.lat];
@@ -261,7 +261,7 @@ export function setMarkersToExistingLayer(map: mapboxgl.Map, options: MarkersOpt
       })
     });
 
-    // @ts-expect-error
+    // @ts-expect-error "'setData' is defined and is used to update the source data"
     map.getSource(sourceId)['setData']({
       type: 'FeatureCollection',
       features,
