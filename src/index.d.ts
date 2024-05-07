@@ -7,7 +7,7 @@ export type MinimumPolygonPath = [Coords, Coords, Coords, ...Coords[]]
 export interface RenderMapOptions {
   /** The initial geographical centerpoint of the map. default is `{lat: 0, lng: 0} ` */
   center?: Coords;
-  /** The map's Mapbox style. This must be an a JSON object conforming to the schema described in the Mapbox {@link https://docs.mapbox.com/style-spec/guides | Style Specification}, or a URL to such JSON. Can accept a null value to allow adding a style manually. */
+  /** The map's Mapbox style. This must be an a JSON object conforming to the schema described in the Mapbox {@link https://docs.mapbox.com/style-spec/guides | Style Specification}, or a URL to such JSON. Can accept a null value to allow adding a style manually. */
   mapStyle?: string;
   /** The initial zoom level of the map. */
   zoom?: number;
