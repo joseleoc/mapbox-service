@@ -1,5 +1,5 @@
 import mapboxgl from "mapbox-gl";
-import { Coords, MarkerFeatureCollection, MarkerIconDictionary, RenderMapOptions, RenderPolygonsOptions, SingleMarkerOptions, MarkersOptions, MarkerPointProps } from "./types/types";
+import { Coords, MarkerFeatureCollection, MarkerIconDictionary, RenderMapOptions, RenderPolygonsOptions, SingleMarkerOptions, MarkersOptions } from "./index.d";
 import { DefaultSources } from "./types/enums";
 import { extractMarkerIcons, markerPropsToFeatures, polygonPropToFeature } from "./utils";
 import { PointFeature, PolygonFeature } from "./types/classes";
